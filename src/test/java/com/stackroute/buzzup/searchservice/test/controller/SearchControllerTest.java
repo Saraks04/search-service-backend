@@ -38,15 +38,17 @@ import static org.mockito.Mockito.when;
 public class SearchControllerTest 
 {
 	
-	    private Movie movie;
+	    
 	    @Autowired
 	    private MockMvc mockMvc;
 	    @MockBean
+	    private Movie movie;
+	    @MockBean
 	    private City city;
 	    @MockBean
-	    SearchService searchService;
+	    private SearchService searchService;
 	    @InjectMocks
-	    SearchController searchController;
+	    private SearchController searchController;
 	    
 	    private List<Movie> movieList;
 	    private List<City> city1;
