@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * and @ComponentScan with their default attributes
  */
 
-@ComponentScan(basePackages= {"com.stackroute.buzzup"})
+//@ComponentScan(basePackages= {"com.stackroute.buzzup"})
 @EnableEurekaClient
 @SpringBootApplication
 public class SearchServiceApplication {

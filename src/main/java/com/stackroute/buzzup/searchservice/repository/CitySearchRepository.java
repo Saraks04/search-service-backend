@@ -20,5 +20,6 @@ public interface CitySearchRepository extends MongoRepository<City,String>
 	 */
 	
 	List<City> findAllMoviesByCity(String city);
+	List<City> findMovieByMovieIdAndCity(String movieId, String City);
 
 }

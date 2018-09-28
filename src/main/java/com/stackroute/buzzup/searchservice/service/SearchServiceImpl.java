@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stackroute.buzzup.searchservice.exceptions.MovieNotFoundException;
+import com.stackroute.buzzup.searchservice.exceptions.TheatreNotFoundException;
 import com.stackroute.buzzup.searchservice.model.City;
 import com.stackroute.buzzup.searchservice.model.Movie;
+import com.stackroute.buzzup.searchservice.model.Theatre;
 import com.stackroute.buzzup.searchservice.repository.CitySearchRepository;
 import com.stackroute.buzzup.searchservice.repository.MovieSearchRepository;
+import com.stackroute.buzzup.searchservice.repository.TheatreSearchRepository;
 
 /*
  * Annotate the class with @Service annotation which contains additional business logic to be 
@@ -22,6 +25,7 @@ public class SearchServiceImpl implements SearchService
 
 	private MovieSearchRepository movieRepository;
 	private CitySearchRepository cityRepository;
+	private TheatreSearchRepository theatreRepository;
 	
 	/*
 	 * We use Constructor-based Autowiring for SearchService class.
@@ -29,13 +33,105 @@ public class SearchServiceImpl implements SearchService
 	 */
 	
 	@Autowired
-	public SearchServiceImpl(MovieSearchRepository movierepo, CitySearchRepository cityrepo) 
+	public SearchServiceImpl(MovieSearchRepository movierepo, CitySearchRepository cityrepo, TheatreSearchRepository theatreRepository) 
 	{
 	
 		this.movieRepository=movierepo;
 		this.cityRepository=cityrepo;
+		this.theatreRepository=theatreRepository;
 		
 	}
+	
+	/*
+	 * This method is used to save a new movie.
+	 */
+	
+	public boolean saveMovie(Movie movie)
+	{
+		if(movieRepository.save(movie) !=null)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	/*
+	 * This method is used to save a new theatre.
+	 */
+	
+	public boolean saveTheatre(Theatre theatre)
+	{
+		if(theatreRepository.save(theatre) !=null)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
+	/*
+	 * This method is used to update a existing movie.
+	 */
+	
+	public Movie updateMovie(Movie movie,String movieId) throws MovieNotFoundException
+	{
+		
+		try
+		{
+		  Movie fetchedmovie=movieRepository.findById(movieId).get();
+		  fetchedmovie.setMovieName(movie.getMovieName());
+		  fetchedmovie.setDescription(movie.getDescription());
+		  fetchedmovie.setCast(movie.getCast());
+		  fetchedmovie.setLanguage(movie.getLanguage());
+		  fetchedmovie.setGenre(movie.getGenre());
+		  fetchedmovie.setReleaseDate(movie.getReleaseDate());
+		  fetchedmovie.setDuration(movie.getDuration());
+		  fetchedmovie.setReviews(movie.getReviews());
+		  fetchedmovie.setRatings(movie.getRatings());
+		  fetchedmovie.setMovieEvents(movie.getMovieEvents());
+		  fetchedmovie.setBackgroundPoster(movie.getBackgroundPoster());
+		  fetchedmovie.setCardPoster(movie.getCardPoster());
+		  fetchedmovie.setTheatres(movie.getTheatres());
+		  
+		  movieRepository.save(fetchedmovie);
+		  return fetchedmovie;
+		}
+		catch(Exception e)
+		{
+			throw new MovieNotFoundException("Movie not found");
+		}
+		
+	}
+	
+	
+	/*
+	 * This method is used to update a existing theatre.
+	 */
+	
+	public Theatre updateTheatre(Theatre theatre,String theatreId) throws TheatreNotFoundException
+	{
+		
+		try
+		{
+		  Theatre fetchedTheatre=theatreRepository.findById(theatreId).get();
+		  fetchedTheatre.setTheatreName(theatre.getTheatreName());
+		  fetchedTheatre.setTheatreLocation(theatre.getTheatreLocation());
+		  fetchedTheatre.setCapacity(theatre.getCapacity());
+		  fetchedTheatre.setUserName(theatre.getUserName());
+		  fetchedTheatre.setShows(theatre.getShows());
+		  
+		  theatreRepository.save(fetchedTheatre);
+		  return fetchedTheatre;
+		}
+		catch(Exception e)
+		{
+			throw new TheatreNotFoundException("Theatre not found");
+		}
+		
+	}
+	
 	
 	/*
 	 * This method should be used to get movie by movieName by calling the corresponding method of 
@@ -71,4 +167,22 @@ public class SearchServiceImpl implements SearchService
 		else
 			throw new MovieNotFoundException("Movie not casted in the city");
 	}
+	
+	/*
+	 * This method should be used to get movie by MovieId and City by calling the corresponding method
+	 *  of repository interface.
+	 */
+	
+	public List<City> getMovieByMovieIdAndCity(String city,String movieId) throws MovieNotFoundException
+	{
+		
+		List<City> movieFetched=cityRepository.findMovieByMovieIdAndCity(movieId, city);
+		
+		if(movieFetched != null)
+			return movieFetched;
+		else
+			throw new MovieNotFoundException("Movie Not Found");
+		
+	}
+
 }

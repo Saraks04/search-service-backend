@@ -4,6 +4,7 @@ package com.stackroute.buzzup.searchservice.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
@@ -22,7 +23,7 @@ public class Movie
 	 * This class must contain all the getters and setters along with no-arg and 
 	 * parameterized constructor with toString method. 
 	 */
-	
+	@Id
 	private int movieId;
 	private String movieName;
 	private String description;
