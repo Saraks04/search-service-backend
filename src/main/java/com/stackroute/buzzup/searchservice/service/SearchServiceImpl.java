@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.buzzup.searchservice.exceptions.MovieAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.MovieNotFoundException;
+import com.stackroute.buzzup.searchservice.exceptions.TheatreAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.TheatreNotFoundException;
 import com.stackroute.buzzup.searchservice.model.City;
 import com.stackroute.buzzup.searchservice.model.Movie;
@@ -46,30 +48,29 @@ public class SearchServiceImpl implements SearchService
 	 * This method is used to save a new movie.
 	 */
 	
-	public boolean saveMovie(Movie movie)
+	public Movie registerMovie(Movie movie) throws MovieAlreadyExistsException
 	{
-		if(movieRepository.save(movie) !=null)
+		Movie movie1=movieRepository.insert(movie);
+		if(movie1 ==null)
 		{
-			return true;
+			throw new MovieAlreadyExistsException("Movie already found");
 		}
-		else
-			return false;
+			return movie1;
 	}
 	
 	/*
 	 * This method is used to save a new theatre.
 	 */
 	
-	public boolean saveTheatre(Theatre theatre)
+	public Theatre registerTheatre(Theatre theatre) throws TheatreAlreadyExistsException
 	{
-		if(theatreRepository.save(theatre) !=null)
+		Theatre theatre1=theatreRepository.insert(theatre);
+		if(theatre1 ==null)
 		{
-			return true;
+			throw new TheatreAlreadyExistsException("Theatre already found");
 		}
-		else
-			return false;
+			return theatre1;
 	}
-	
 	
 	/*
 	 * This method is used to update a existing movie.

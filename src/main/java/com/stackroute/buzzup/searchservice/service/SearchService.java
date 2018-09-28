@@ -2,7 +2,9 @@ package com.stackroute.buzzup.searchservice.service;
 
 import java.util.List;
 
+import com.stackroute.buzzup.searchservice.exceptions.MovieAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.MovieNotFoundException;
+import com.stackroute.buzzup.searchservice.exceptions.TheatreAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.TheatreNotFoundException;
 import com.stackroute.buzzup.searchservice.model.City;
 import com.stackroute.buzzup.searchservice.model.Movie;
@@ -15,8 +17,8 @@ public interface SearchService
 	 * SearchService interface contains the methods to be implemented in Implementation classes.
 	 */
 	
-	public boolean saveMovie(Movie movie); 
-	public boolean saveTheatre(Theatre theatre); 
+	public Movie registerMovie(Movie movie) throws MovieAlreadyExistsException; 
+	public Theatre registerTheatre(Theatre theatre)throws TheatreAlreadyExistsException; 
 	public Movie updateMovie(Movie movie,String movieId) throws MovieNotFoundException;
 	public Theatre updateTheatre(Theatre theatre,String theatreId) throws TheatreNotFoundException;
 	public List<Movie> getMovieByMovieName(String movieName) throws MovieNotFoundException;
