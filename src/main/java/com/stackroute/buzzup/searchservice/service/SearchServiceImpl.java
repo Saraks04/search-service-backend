@@ -48,28 +48,20 @@ public class SearchServiceImpl implements SearchService
 	 * This method is used to save a new movie.
 	 */
 	
-	public Movie registerMovie(Movie movie) throws MovieAlreadyExistsException
+	public Movie registerMovie(Movie movie) 
 	{
 		Movie movie1=movieRepository.insert(movie);
-		if(movie1 ==null)
-		{
-			throw new MovieAlreadyExistsException("Movie already found");
-		}
-			return movie1;
+		return movie1;
 	}
 	
 	/*
 	 * This method is used to save a new theatre.
 	 */
 	
-	public Theatre registerTheatre(Theatre theatre) throws TheatreAlreadyExistsException
+	public Theatre registerTheatre(Theatre theatre)
 	{
 		Theatre theatre1=theatreRepository.insert(theatre);
-		if(theatre1 ==null)
-		{
-			throw new TheatreAlreadyExistsException("Theatre already found");
-		}
-			return theatre1;
+		return theatre1;
 	}
 	
 	/*

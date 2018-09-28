@@ -60,7 +60,7 @@ private SearchService searchService;
         
 		try
         {
-            searchService.saveMovie(movie);
+            searchService.registerMovie(movie);
             return new ResponseEntity<Movie>(movie,HttpStatus.CREATED);
             
         }
@@ -84,7 +84,7 @@ private SearchService searchService;
         
 		try
         {
-            searchService.saveTheatre(theatre);
+            searchService.registerTheatre(theatre);
             return new ResponseEntity<Theatre>(theatre,HttpStatus.CREATED);
             
         }
