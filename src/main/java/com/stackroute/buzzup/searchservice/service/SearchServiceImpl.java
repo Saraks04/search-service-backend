@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.stackroute.buzzup.searchservice.exceptions.MovieAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.MovieNotFoundException;
-import com.stackroute.buzzup.searchservice.exceptions.TheatreAlreadyExistsException;
 import com.stackroute.buzzup.searchservice.exceptions.TheatreNotFoundException;
 import com.stackroute.buzzup.searchservice.model.City;
 import com.stackroute.buzzup.searchservice.model.Movie;
@@ -58,7 +55,7 @@ public class SearchServiceImpl implements SearchService
 	 * This method is used to save a new theatre.
 	 */
 	
-	public Theatre registerTheatre(Theatre theatre)
+	public Theatre registerTheatre(Theatre theatre)throws Exception
 	{
 		Theatre theatre1=theatreRepository.insert(theatre);
 		return theatre1;
@@ -103,7 +100,7 @@ public class SearchServiceImpl implements SearchService
 	 * This method is used to update a existing theatre.
 	 */
 	
-	public Theatre updateTheatre(Theatre theatre,String theatreId) throws TheatreNotFoundException
+	public Theatre updateTheatre(String theatreId,Theatre theatre) throws TheatreNotFoundException
 	{
 		
 		try
@@ -160,22 +157,4 @@ public class SearchServiceImpl implements SearchService
 		else
 			throw new MovieNotFoundException("Movie not casted in the city");
 	}
-	
-	/*
-	 * This method should be used to get movie by MovieId and City by calling the corresponding method
-	 *  of repository interface.
-	 */
-	
-	public List<City> getMovieByMovieIdAndCity(String city,String movieId) throws MovieNotFoundException
-	{
-		
-		List<City> movieFetched=cityRepository.findMovieByMovieIdAndCity(movieId, city);
-		
-		if(movieFetched != null)
-			return movieFetched;
-		else
-			throw new MovieNotFoundException("Movie Not Found");
-		
-	}
-
 }

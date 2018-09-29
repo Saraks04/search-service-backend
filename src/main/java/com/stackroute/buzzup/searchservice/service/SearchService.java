@@ -16,11 +16,9 @@ public interface SearchService
 	 */
 	
 	public Movie registerMovie(Movie movie); 
-	public Theatre registerTheatre(Theatre theatre); 
+	public Theatre registerTheatre(Theatre theatre)throws Exception; 
 	public Movie updateMovie(Movie movie,String movieId) throws MovieNotFoundException;
-	public Theatre updateTheatre(Theatre theatre,String theatreId) throws TheatreNotFoundException;
+	public Theatre updateTheatre(String theatreId,Theatre theatre) throws TheatreNotFoundException;
 	public List<Movie> getMovieByMovieName(String movieName) throws MovieNotFoundException;
 	public List<City> getMovieByCity(String city) throws MovieNotFoundException;
-	public List<City> getMovieByMovieIdAndCity(String city,String movieId) throws MovieNotFoundException;
-	
 }

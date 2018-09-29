@@ -55,7 +55,7 @@ private SearchService searchService;
 	 */
 	
 	@PostMapping("/api/v1/movie")
-    public ResponseEntity<?> saveMovie(@RequestBody Movie movie)throws MovieAlreadyExistsException
+    public ResponseEntity<?> registerMovie(@RequestBody Movie movie)throws MovieAlreadyExistsException
 	{
         
 		try
@@ -79,7 +79,7 @@ private SearchService searchService;
 	 */
 	
 	@PostMapping("/api/v1/theatre")
-    public ResponseEntity<?> saveTheatre(@RequestBody Theatre theatre)throws TheatreAlreadyExistsException
+    public ResponseEntity<?> registerTheatre(@RequestBody Theatre theatre)throws TheatreAlreadyExistsException
 	{
         
 		try
@@ -138,7 +138,7 @@ private SearchService searchService;
 
 	   try 
 	   {
-	      Theatre fetchedTheatre = searchService.updateTheatre(theatre, theatreId);
+	      Theatre fetchedTheatre = searchService.updateTheatre(theatreId, theatre);
 	      responseEntity = new ResponseEntity<>(fetchedTheatre, HttpStatus.OK);
 	   } 
 	   
@@ -203,31 +203,4 @@ private SearchService searchService;
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	/*
-	 * The below handler method is mapped to the URL "/api/v1/city/{city}" inorder
-	 * to get all movie details by a particular movieId and city.
-	 * It must return any one of the status messages based on the the retrieved result:
-	 * 1.200(OK) - If the movie is found      
-	 * 2.404(NOt_FOUND) - If the movie does not exist in the database.   
-	 */
-	
-	@GetMapping("/api/v1/city/{city}")
-	public ResponseEntity<?> getMovieByMovieIdAndCity (@PathVariable String city,@PathVariable String movieId) throws MovieNotFoundException
-	{
-		try
-		{
-			List<City> getMovie=searchService.getMovieByMovieIdAndCity(city, movieId);
-			if(getMovie==null)
-				return new ResponseEntity<String>("Movie not found",HttpStatus.NOT_FOUND);
-			else
-				return new ResponseEntity<List<City>>(getMovie,HttpStatus.OK);
-				
-		}
-		catch(MovieNotFoundException e)
-		{
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
-		}
-	}
-	
 }

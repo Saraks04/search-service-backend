@@ -30,7 +30,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-
 @RunWith(SpringRunner.class)
 @WebMvcTest
 
@@ -43,6 +42,8 @@ public class SearchControllerTest
 	    private MockMvc mockMvc;
 	    @MockBean
 	    private Movie movie;
+	    @MockBean
+	    private Theatre theatre;
 	    @MockBean
 	    private City city;
 	    @MockBean
@@ -66,13 +67,13 @@ public class SearchControllerTest
 	        movie.setCardPoster("src/images/im2.jpg");
 	        movie.setDescription("horror");
 	        movie.setLanguage("english");
-	        
+	        theatre.setTheatreId("pvr123");
 	         city=new City();
 	         city.setCity("bangalore");
 	         city.setMovieList(movieList);
 	         city.setTheatreList(theatreList);
 	    }
-
+	  
 	    @Test
 	    public void getMovieByMovieNameTest() throws Exception 
 	    {
@@ -107,6 +108,8 @@ public class SearchControllerTest
 	        }
 	    }
 	    
-	    
+
+
+	
 }
 
