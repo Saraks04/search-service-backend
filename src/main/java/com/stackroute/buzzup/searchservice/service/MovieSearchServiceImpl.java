@@ -97,7 +97,8 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 	public void consumeKafka(MovieSchedule movieschedule) {
 
         boolean flag = false;
-		int i, k = 0;
+		int i;
+		int k = 0;
 		City cities;
 		Movie movie;
 		Movie tempMovie;
@@ -119,20 +120,25 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 					flag = true;
 					k = i;
 					break;
-				} else {
+				} 
+				else 
+				{
 					flag = false;
 				}
 			}
-			if (flag == true) {
+			if (flag) {
 				movie = movies.get(k - 1);
 				theaters = movie.getTheatres();
 				Iterator<Theatre> iterator1 = theaters.iterator();
 				while (iterator1.hasNext()) {
 					theater = iterator1.next();
 
-					if (theater.getTheatreName().equals(movieschedule.getTheatreName())) {
+					if (theater.getTheatreName().equals(movieschedule.getTheatreName())) 
+					{
 		
-					} else {
+					} 
+					else 
+					{
 						theatre1 = new Theatre();	
 						theatre1.setTheatreId(movieschedule.getTheatreId());
 						theatre1.setTheatreName(movieschedule.getTheatreName());
@@ -142,8 +148,8 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 						String show=movieschedule.getShowTimings().trim();
 						String[] showtiming=show.split(",");
 						theatre1.setShowTimings(showtiming);
-						theatre1.setWeekends_Price(movieschedule.getWeekends_Price());
-						theatre1.setWeekdays_Price(movieschedule.getWeekdays_Price());
+						theatre1.setWeekendsPrice(movieschedule.getWeekendsPrice());
+						theatre1.setWeekdaysPrice(movieschedule.getWeekdaysPrice());
 						theatre1.setTypesOfSeats(movieschedule.getTypesOfSeats());
 						theatre1.setNumberOfSeats(movieschedule.getNumberOfSeats());
 						theatre1.setScreenedmovies(movieschedule.getScreenedmovies());
@@ -164,8 +170,8 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 				String show=movieschedule.getShowTimings().trim();
 				String[] showtiming=show.split(",");
 				theatre1.setShowTimings(showtiming);
-				theatre1.setWeekends_Price(movieschedule.getWeekends_Price());
-				theatre1.setWeekdays_Price(movieschedule.getWeekdays_Price());
+				theatre1.setWeekendsPrice(movieschedule.getWeekendsPrice());
+				theatre1.setWeekdaysPrice(movieschedule.getWeekdaysPrice());
 				theatre1.setTypesOfSeats(movieschedule.getTypesOfSeats());
 				theatre1.setNumberOfSeats(movieschedule.getNumberOfSeats());
 				theatre1.setScreenedmovies(movieschedule.getScreenedmovies());
@@ -192,8 +198,8 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 			String show=movieschedule.getShowTimings().trim();
 			String[] showtiming=show.split(",");
 			theater.setShowTimings(showtiming);
-			theater.setWeekends_Price(movieschedule.getWeekends_Price());
-			theater.setWeekdays_Price(movieschedule.getWeekdays_Price());
+			theater.setWeekendsPrice(movieschedule.getWeekendsPrice());
+			theater.setWeekdaysPrice(movieschedule.getWeekdaysPrice());
 			theater.setTypesOfSeats(movieschedule.getTypesOfSeats());
 			theater.setNumberOfSeats(movieschedule.getNumberOfSeats());
 			theater.setScreenedmovies(movieschedule.getScreenedmovies());

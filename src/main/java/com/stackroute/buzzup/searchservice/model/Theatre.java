@@ -15,15 +15,15 @@ public class Theatre {
 	private int showNumbers;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	private String[] showTimings;
-	private int[] weekends_Price;
-	private int[] weekdays_Price;
+	private int[] weekendsPrice;
+	private int[] weekdaysPrice;
 	private String[] screenedmovies;
 	private String[] runningmovies;
 	private String[] typesOfSeats;
 	private int[] numberOfSeats;
 
 	public Theatre(String theatreId, String theatreName, String theatreLocation, Seats seatLayout, int showNumbers,
-			String[] showTimings, int[] weekends_Price, int[] weekdays_Price, String[] screenedmovies,
+			String[] showTimings, int[] weekendsPrice, int[] weekdaysPrice, String[] screenedmovies,
 			String[] runningmovies, String[] typesOfSeats, int[] numberOfSeats) {
 		super();
 		this.theatreId = theatreId;
@@ -32,8 +32,8 @@ public class Theatre {
 		this.seatLayout = seatLayout;
 		this.showNumbers = showNumbers;
 		this.showTimings = showTimings;
-		this.weekends_Price = weekends_Price;
-		this.weekdays_Price = weekdays_Price;
+		this.weekendsPrice = weekendsPrice;
+		this.weekdaysPrice = weekdaysPrice;
 		this.screenedmovies = screenedmovies;
 		this.runningmovies = runningmovies;
 		this.typesOfSeats = typesOfSeats;
@@ -92,20 +92,20 @@ public class Theatre {
 		this.showTimings = showTimings;
 	}
 
-	public int[] getWeekends_Price() {
-		return weekends_Price;
+	public int[] getWeekendsPrice() {
+		return weekendsPrice;
 	}
 
-	public void setWeekends_Price(int[] weekends_Price) {
-		this.weekends_Price = weekends_Price;
+	public void setWeekendsPrice(int[] weekendsPrice) {
+		this.weekendsPrice = weekendsPrice;
 	}
 
-	public int[] getWeekdays_Price() {
-		return weekdays_Price;
+	public int[] getWeekdaysPrice() {
+		return weekdaysPrice;
 	}
 
-	public void setWeekdays_Price(int[] weekdays_Price) {
-		this.weekdays_Price = weekdays_Price;
+	public void setWeekdaysPrice(int[] weekdaysPrice) {
+		this.weekdaysPrice = weekdaysPrice;
 	}
 
 	public String[] getScreenedmovies() {

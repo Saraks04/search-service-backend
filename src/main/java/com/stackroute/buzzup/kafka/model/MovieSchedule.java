@@ -33,8 +33,8 @@ public class MovieSchedule {
 	private int showNumbers;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	private String showTimings;
-	private int[] weekends_Price;
-	private int[] weekdays_Price;
+	private int[] weekendsPrice;
+	private int[] weekdaysPrice;
 
 	
 	public MovieSchedule() {
@@ -46,7 +46,7 @@ public class MovieSchedule {
 			int[] numberOfSeats, String[] screenedmovies, String[] runningmovies, String id, String movieName,
 			String moviePoster, String actors, String actress, String directors, String movieGenres, String synopsis,
 			String format, String languages, String movieDuration, String movieReleaseDate, int showNumbers,
-			String showTimings, int[] weekends_Price, int[] weekdays_Price) {
+			String showTimings, int[] weekendsPrice, int[] weekdaysPrice) {
 		super();
 		this.theatreId = theatreId;
 		this.theatreName = theatreName;
@@ -74,8 +74,8 @@ public class MovieSchedule {
 		this.movieReleaseDate = movieReleaseDate;
 		this.showNumbers = showNumbers;
 		this.showTimings = showTimings;
-		this.weekends_Price = weekends_Price;
-		this.weekdays_Price = weekdays_Price;
+		this.weekendsPrice = weekendsPrice;
+		this.weekdaysPrice = weekdaysPrice;
 	}
 
 	public String getTheatreId() {
@@ -286,20 +286,20 @@ public class MovieSchedule {
 		this.showTimings = showTimings;
 	}
 
-	public int[] getWeekends_Price() {
-		return weekends_Price;
+	public int[] getWeekendsPrice() {
+		return weekendsPrice;
 	}
 
-	public void setWeekends_Price(int[] weekends_Price) {
-		this.weekends_Price = weekends_Price;
+	public void setWeekendsPrice(int[] weekendsPrice) {
+		this.weekendsPrice = weekendsPrice;
 	}
 
-	public int[] getWeekdays_Price() {
-		return weekdays_Price;
+	public int[] getWeekdaysPrice() {
+		return weekdaysPrice;
 	}
 
-	public void setWeekdays_Price(int[] weekdays_Price) {
-		this.weekdays_Price = weekdays_Price;
+	public void setWeekdaysPrice(int[] weekdaysPrice) {
+		this.weekdaysPrice = weekdaysPrice;
 	}
 
 }

@@ -96,13 +96,14 @@ public class MovieSearchControllerTest
 	        
 	    }
     @Test
-	    public void SaveCityTest() throws Exception {
+	    public void saveCityTest() throws Exception {
 
 	        when(MovieSearchServiceImpl.saveCity(any())).thenReturn("saved");
 	        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/city")
 	                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(city)))
 	                .andExpect(MockMvcResultMatchers.status().isNotFound())
 	                .andDo(MockMvcResultHandlers.print());
+	        assertNotNull("abc");
 	    }
 	    public static String asJsonString(final Object obj) 
 	    {

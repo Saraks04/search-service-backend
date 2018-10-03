@@ -28,7 +28,7 @@ import com.stackroute.buzzup.searchservice.service.MovieSearchServiceImpl;
 
 public class MovieSearchController 
 {
-	MovieSearchServiceImpl searchService;
+	private MovieSearchServiceImpl searchService;
 	
 	/*
 	 * We use Constructor-based Autowiring for SearchController class.
