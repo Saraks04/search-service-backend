@@ -1,13 +1,12 @@
 package com.stackroute.buzzup.searchservice.exceptions;
 
-public class MovieNotFoundException extends Exception
+public class MovieNotFoundException extends Exception 
 {
 
 	private static final long serialVersionUID= 1L;
 	
-	public MovieNotFoundException(String message)
+	public MovieNotFoundException(String msg) 
 	{
-		super(message);
+		super(msg);
 	}
-	
 }

@@ -1,11 +1,9 @@
 package com.stackroute.buzzup.searchservice.test.controller;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.buzzup.searchservice.controller.SearchController;
 import com.stackroute.buzzup.searchservice.model.City;
 import com.stackroute.buzzup.searchservice.model.Movie;
 import com.stackroute.buzzup.searchservice.model.Theatre;
-import com.stackroute.buzzup.searchservice.service.SearchService;
+import com.stackroute.buzzup.searchservice.service.MovieSearchServiceImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertNotNull;
 
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -30,11 +29,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest
 
 
-public class SearchControllerTest 
+public class MovieSearchControllerTest 
 {
 	
 	    
@@ -47,37 +47,37 @@ public class SearchControllerTest
 	    @MockBean
 	    private City city;
 	    @MockBean
-	    private SearchService searchService;
+	    private MovieSearchServiceImpl MovieSearchServiceImpl;
 	    @InjectMocks
-	    private SearchController searchController;
+	    private MovieSearchControllerTest MovieSearchController;
 	    
 	    private List<Movie> movieList;
-	    private List<City> city1;
-	    private List<Theatre> theatreList;
+
 	    
 	    @Before
 	    public void setUp()
 	    {
 	    	MockitoAnnotations.initMocks(this);
-	    	mockMvc = MockMvcBuilders.standaloneSetup(searchController).build();
+	    	mockMvc = MockMvcBuilders.standaloneSetup(MovieSearchController).build();
 		    movie = new Movie();
-	        movie.setId(2);
+	        movie.setId("2");
 	        movie.setMovieName("incidious");
-	        movie.setBackgroundPoster("src/images/im1.jpg");
-	        movie.setCardPoster("src/images/im2.jpg");
-	        movie.setDescription("horror");
-	        movie.setLanguage("english");
+	        movie.setMoviePoster("src/images/im1.jpg");
+	        movie.setSynopsis("src/images/im2.jpg");
+	        movie.setMovieReleasedate("horror");
+	        movie.setMovieDuration("english");
+	        movie.setLanguage("English");
+	        movie.setMovieGenre("horror");
 	        theatre.setTheatreId("pvr123");
-	         city=new City();
-	         city.setCity("bangalore");
-	         city.setMovieList(movieList);
-	         city.setTheatreList(theatreList);
+	        city=new City();
+	        city.setId("3");
+	        city.setCityName("chennai");
 	    }
 	  
 	    @Test
-	    public void getMovieByMovieNameTest() throws Exception 
+	    public void getMovieByNameTest() throws Exception 
 	    {
-	        when(searchService.getMovieByMovieName("incidious")).thenReturn(movieList);
+	        when(MovieSearchServiceImpl.getByTitle("incidious")).thenReturn(movieList);
 	        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/movie/incidious").contentType(MediaType.APPLICATION_JSON)
 	                .content(asJsonString(movie))).andExpect(MockMvcResultMatchers.status().isNotFound())
 	                .andDo(MockMvcResultHandlers.print());
@@ -88,14 +88,22 @@ public class SearchControllerTest
 	    @Test
 	    public void getMovieByCityTest() throws Exception 
 	    {
-	        when(searchService.getMovieByCity("bangalore")).thenReturn(city1);
+	        when(MovieSearchServiceImpl.getByCity("bangalore")).thenReturn(city);
 	        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/city/bangalore").contentType(MediaType.APPLICATION_JSON)
 	                .content(asJsonString(city))).andExpect(MockMvcResultMatchers.status().isNotFound())
 	                .andDo(MockMvcResultHandlers.print());
 	        assertNotNull("abc");
 	        
 	    }
-	    
+    @Test
+	    public void SaveCityTest() throws Exception {
+
+	        when(MovieSearchServiceImpl.saveCity(any())).thenReturn("saved");
+	        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/city")
+	                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(city)))
+	                .andExpect(MockMvcResultMatchers.status().isNotFound())
+	                .andDo(MockMvcResultHandlers.print());
+	    }
 	    public static String asJsonString(final Object obj) 
 	    {
 	        try 
@@ -107,9 +115,4 @@ public class SearchControllerTest
 	            throw new JsonParseException(e);
 	        }
 	    }
-	    
-
-
-	
 }
-

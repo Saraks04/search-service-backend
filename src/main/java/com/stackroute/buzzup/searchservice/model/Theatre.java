@@ -1,46 +1,47 @@
 package com.stackroute.buzzup.searchservice.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/*
- * @Document annotation identifies a domain object to be persisted to MongoDB.
- */
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document
-public class Theatre 
-{
-	
-	/*
-	 * This class contains 6 fields - (theatreID,theatreName,theatreLocation,capacity,userName,shows).
-	 * The field shows must be of List type and capacity must be of type int.
-	 * This class must contain all the getters and setters along with no-arg and 
-	 * parameterized constructor with toString method. 
-	 */
-     @Id
-	 private String theatreId;
-	 private String theatreName;
-	 private String theatreLocation;
-	 private int capacity;
-	 private String userName;
-	 private List<Shows> shows;
-	 
-	 public Theatre() 
-	 {
-		
-	 }
+public class Theatre {
+	@Id
+	private String theatreId;
+	private String theatreName;
+	private String theatreLocation;
+	private Seats seatLayout;
+	private int showNumbers;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private String[] showTimings;
+	private int[] weekends_Price;
+	private int[] weekdays_Price;
+	private String[] screenedmovies;
+	private String[] runningmovies;
+	private String[] typesOfSeats;
+	private int[] numberOfSeats;
 
-	public Theatre(String theatreId, String theatreName, String theatreLocation, int capacity, String userName,
-			List<Shows> shows) {
+	public Theatre(String theatreId, String theatreName, String theatreLocation, Seats seatLayout, int showNumbers,
+			String[] showTimings, int[] weekends_Price, int[] weekdays_Price, String[] screenedmovies,
+			String[] runningmovies, String[] typesOfSeats, int[] numberOfSeats) {
 		super();
 		this.theatreId = theatreId;
 		this.theatreName = theatreName;
 		this.theatreLocation = theatreLocation;
-		this.capacity = capacity;
-		this.userName = userName;
-		this.shows = shows;
+		this.seatLayout = seatLayout;
+		this.showNumbers = showNumbers;
+		this.showTimings = showTimings;
+		this.weekends_Price = weekends_Price;
+		this.weekdays_Price = weekdays_Price;
+		this.screenedmovies = screenedmovies;
+		this.runningmovies = runningmovies;
+		this.typesOfSeats = typesOfSeats;
+		this.numberOfSeats = numberOfSeats;
+	}
+
+	public Theatre() {
+		super();
 	}
 
 	public String getTheatreId() {
@@ -67,34 +68,76 @@ public class Theatre
 		this.theatreLocation = theatreLocation;
 	}
 
-	public int getCapacity() {
-		return capacity;
+	public Seats getSeatLayout() {
+		return seatLayout;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setSeatLayout(Seats seatLayout) {
+		this.seatLayout = seatLayout;
 	}
 
-	public String getUserName() {
-		return userName;
+	public int getShowNumbers() {
+		return showNumbers;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setShowNumbers(int showNumbers) {
+		this.showNumbers = showNumbers;
 	}
 
-	public List<Shows> getShows() {
-		return shows;
+	public String[] getShowTimings() {
+		return showTimings;
 	}
 
-	public void setShows(List<Shows> shows) {
-		this.shows = shows;
+	public void setShowTimings(String[] showTimings) {
+		this.showTimings = showTimings;
 	}
 
-	@Override
-	public String toString() {
-		return "Theatre [theatreId=" + theatreId + ", theatreName=" + theatreName + ", theatreLocation="
-				+ theatreLocation + ", capacity=" + capacity + ", userName=" + userName + ", shows=" + shows + "]";
+	public int[] getWeekends_Price() {
+		return weekends_Price;
+	}
+
+	public void setWeekends_Price(int[] weekends_Price) {
+		this.weekends_Price = weekends_Price;
+	}
+
+	public int[] getWeekdays_Price() {
+		return weekdays_Price;
+	}
+
+	public void setWeekdays_Price(int[] weekdays_Price) {
+		this.weekdays_Price = weekdays_Price;
+	}
+
+	public String[] getScreenedmovies() {
+		return screenedmovies;
+	}
+
+	public void setScreenedmovies(String[] screenedmovies) {
+		this.screenedmovies = screenedmovies;
+	}
+
+	public String[] getRunningmovies() {
+		return runningmovies;
+	}
+
+	public void setRunningmovies(String[] runningmovies) {
+		this.runningmovies = runningmovies;
+	}
+
+	public String[] getTypesOfSeats() {
+		return typesOfSeats;
+	}
+
+	public void setTypesOfSeats(String[] typesOfSeats) {
+		this.typesOfSeats = typesOfSeats;
+	}
+
+	public int[] getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(int[] numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
 	}
 
 }

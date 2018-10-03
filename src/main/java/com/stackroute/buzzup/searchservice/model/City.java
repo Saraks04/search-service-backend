@@ -1,47 +1,32 @@
 package com.stackroute.buzzup.searchservice.model;
 
 import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-/*
- * @Document annotation identifies a domain object to be persisted to MongoDB.
- */
 
 @Document
 public class City 
 {
 
-	/*
-	 * This class contains 3 fields - (city,movieList,theatreList).
-	 * The fields movieList and theatreList must be of List type.
-	 * This class must contain all the getters and setters along with no-arg and 
-	 * parameterized constructor with toString method. 
-	 */
 	@Id
-	private String city;
+	public String id;
+	private String cityName;
 	private List<Movie> movieList;
-	private List<Theatre> theatreList;
-	
-	public City()
-	{
-		
+
+	public String getId() {
+		return id;
 	}
 
-	public City(String city, List<Movie> movieList, List<Theatre> theatreList) {
-		super();
-		this.city = city;
-		this.movieList = movieList;
-		this.theatreList = theatreList;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getCity() {
-		return city;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public List<Movie> getMovieList() {
@@ -52,17 +37,22 @@ public class City
 		this.movieList = movieList;
 	}
 
-	public List<Theatre> getTheatreList() {
-		return theatreList;
+	// All Arguments constructor
+	public City(String id, String cityName, List<Movie> movieList) {
+		super();
+		this.id = id;
+		this.cityName = cityName;
+		this.movieList = movieList;
 	}
 
-	public void setTheatreList(List<Theatre> theatreList) {
-		this.theatreList = theatreList;
+	public City(String cityName, List<Movie> movieList) {
+		super();
+
+		this.cityName = cityName;
+		this.movieList = movieList;
 	}
 
-	@Override
-	public String toString() {
-		return "City [city=" + city + ", movieList=" + movieList + ", theatreList=" + theatreList + "]";
+	public City() {
+		super();
 	}
-	
 }
