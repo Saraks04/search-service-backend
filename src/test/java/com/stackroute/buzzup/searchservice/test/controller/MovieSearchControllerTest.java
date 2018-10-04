@@ -98,7 +98,7 @@ public class MovieSearchControllerTest
     @Test
 	    public void saveCityTest() throws Exception {
 
-	        when(MovieSearchServiceImpl.saveCity(any())).thenReturn("saved");
+	        when(MovieSearchServiceImpl.saveCity(any(City.class))).thenReturn("saved");
 	        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/city")
 	                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(city)))
 	                .andExpect(MockMvcResultMatchers.status().isNotFound())
